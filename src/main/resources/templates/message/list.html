@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Messages</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+          integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+</head>
+<body>
+<div th:switch="${messages}" class="container my-5">
+    <div class="row">
+        <div class="col-md-6">
+            <h2 th:case="null">No messages yet!</h2>
+            <div th:case="*">
+                <h2 class="my-5">Messages</h2>
+                <a th:href="@{/html/message/add/}" class="btn btn-primary">Add new message</a>
+                <br>
+                <br>
+                <br>
+
+                <table class="table table-striped table-responsive-md">
+                    <tbody>
+                    <tr th:each="message : ${messages}">
+                        <td th:text="${message.date}"></td>
+                        <td th:text="${message.content}"></td>
+                        <td><a th:href="@{/html/message/edit/{id}(id=${message.id})}" class="btn btn-primary">Edit</a></td>
+                        <td><a th:href="@{/html/message/delete/{id}(id=${message.id})}" class="btn btn-primary">Delete</a></td>
+                        <td><a th:href="@{/html/message/comment/{id}(id=${message.id})}" class="btn btn-primary">Comment</a></td>
+                        <td><a th:href="@{/html/message/user/}" class="btn btn-primary">User info</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
